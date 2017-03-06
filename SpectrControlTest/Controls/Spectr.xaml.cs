@@ -23,7 +23,22 @@ namespace SpectrControl.Controls
                 SetValue(ValuesProperty, value);
             }
         }
-        
+
+        public static readonly DependencyProperty CaptionProperty = DependencyProperty.Register(
+            "Caption", typeof(string), typeof(Spectr), new PropertyMetadata(default(string)));
+
+        public string Caption
+        {
+            get
+            {
+                return (string) GetValue(CaptionProperty);
+            }
+            set
+            {
+                SetValue(CaptionProperty, value);
+            }
+        }
+
         public Spectr()
         {
             InitializeComponent();

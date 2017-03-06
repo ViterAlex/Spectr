@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:SpectrControl.ViewModels"
         xmlns:controls="clr-namespace:SpectrControl.Controls"
-        Title="Main Window"
+        Title="Спектр"
         Height="400"
         Width="800">
 
@@ -15,15 +15,26 @@
         <UniformGrid Columns="1">
             <UniformGrid.Resources>
                 <Style TargetType="controls:Spectr">
-                    <Setter Property="Background" Value="DarkOliveGreen"/>
-                    <Setter Property="Foreground" Value="Yellow"/>
+                    <Setter Property="Background"
+                            Value="DarkOliveGreen" />
+                    <Setter Property="Foreground"
+                            Value="Yellow" />
                 </Style>
             </UniformGrid.Resources>
-            <controls:Spectr Values="{Binding ValuesSet[0]}"/>
-            <controls:Spectr Values="{Binding ValuesSet[1]}"/>
-            <controls:Spectr Values="{Binding ValuesSet[2]}"/>
-            <controls:Spectr Values="{Binding ValuesSet[3]}"/>
-            <controls:Spectr Values="{Binding ValuesSet[4]}"/>
+            <controls:Spectr Values="{Binding ValuesSet[0]}"
+                             Caption="Канал 1" />
+            <controls:Spectr Values="{Binding ValuesSet[1]}"
+                             Foreground="YellowGreen"
+                             Caption="Канал 2" />
+            <controls:Spectr Values="{Binding ValuesSet[2]}"
+                             Foreground="GreenYellow"
+                             Caption="Канал 3" />
+            <controls:Spectr Values="{Binding ValuesSet[3]}"
+                             Foreground="Orange"
+                             Caption="Канал 4" />
+            <controls:Spectr Values="{Binding ValuesSet[4]}"
+                             Foreground="OrangeRed"
+                             Caption="Канал 5" />
         </UniformGrid>
         <!--<ListBox ItemsSource="{Binding ValuesSet}"
                  VerticalAlignment="Stretch"
@@ -69,7 +80,7 @@
             <ToggleButton.Style>
                 <Style TargetType="ToggleButton">
                     <Setter Property="Content"
-                            Value="Вкл." />
+                            Value="{StaticResource TimerOnText}" />
                     <Setter Property="Margin"
                             Value="5" />
                     <Setter Property="Padding"
@@ -78,7 +89,7 @@
                         <Trigger Property="IsChecked"
                                  Value="True">
                             <Setter Property="Content"
-                                    Value="Выкл." />
+                                    Value="{StaticResource TimerOffText}" />
                         </Trigger>
                     </Style.Triggers>
                 </Style>

@@ -4,7 +4,9 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
+using SpectrControl.Controls;
 
 namespace SpectrControl
 {
@@ -12,15 +14,28 @@ namespace SpectrControl
     {
         #region Implementation of IMultiValueConverter
 
-        private static int _counter;
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            //Debug.WriteLine("Counter: {0}",++_counter);
             double max = ((IEnumerable<double>)values[0]).Max();
             double height = (double)values[1];
-            double val = (double)values[2];
-            //Debug.Assert(value < 500, "value<500");
-            return val * height * 0.9 / max;
+            double value = (double)values[2];
+            ScaleType st = (ScaleType)values[3];
+            switch (st)
+            {
+                case ScaleType.N:
+                    break;
+                case ScaleType.Log:
+                    value = Math.Log10(value);
+                    max = Math.Log10(max);
+                    break;
+                case ScaleType.Ln:
+                    value = Math.Log(value);
+                    max = Math.Log(max);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            return value * height * 0.9 / max;
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

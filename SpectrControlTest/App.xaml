@@ -1,8 +1,13 @@
 ﻿<Application x:Class="SpectrControl.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:clr="clr-namespace:System;assembly=mscorlib"
     Startup="OnStartup">
     <Application.Resources>
-         
+        <clr:String x:Key="TimerOnText">Вкл. таймер</clr:String>
+        <clr:String x:Key="TimerOffText">Выкл. таймер</clr:String>
+        <clr:String x:Key="NormalScaleText">Линейная шкала</clr:String>
+        <clr:String x:Key="LogScaleText">Шкала по десятичному логарифму</clr:String>
+        <clr:String x:Key="LnScaleText">Шкала по натуральному логарифму</clr:String>
     </Application.Resources>
 </Application>

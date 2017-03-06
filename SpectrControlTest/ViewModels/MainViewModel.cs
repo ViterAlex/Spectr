@@ -53,7 +53,8 @@ namespace SpectrControl.ViewModels
             var rnd = new Random();
             foreach (var values in ValuesSet)
             {
-                for (int i = 0; i < 128; i++)
+                var limit = rnd.Next(128, 256);
+                for (int i = 0; i < limit; i++)
                 {
                     values.Add(rnd.NextDouble(100, 400));
                 }

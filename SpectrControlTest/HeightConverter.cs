@@ -15,7 +15,6 @@ namespace SpectrControl
             double max = ((IEnumerable<double>)values[0]).Max();
             double value = (double)values[1];
             double height = (double)values[2];
-            //Debug.Assert(value < 500, "value<500");
             return value * height * 0.9 / max;
         }
 

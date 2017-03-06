@@ -12,7 +12,12 @@
         <local:ScaleConverter x:Key="ScaleConverter" />
     </UserControl.Resources>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <ListBox x:Name="ListBox"
+                 Grid.Column="1"
                  ItemsSource="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:Spectr}}, Path=Values}"
                  HorizontalContentAlignment="Stretch">
             <ItemsControl.ItemsPanel>
@@ -71,6 +76,8 @@
                                         <Binding RelativeSource="{RelativeSource AncestorType={x:Type UniformGrid}}"
                                                  Path="ActualHeight" />
                                         <Binding />
+                                        <Binding ElementName="ScaleSelector"
+                                                 Path="ScaleType" />
                                     </MultiBinding>
                                 </ScaleTransform.ScaleY>
                             </ScaleTransform>
@@ -82,6 +89,8 @@
         <!--Значение выбранного элемента-->
         <TextBlock HorizontalAlignment="Right"
                    VerticalAlignment="Top"
+                   Grid.Column="1"
+                   Panel.ZIndex="100"
                    Padding="2"
                    Margin="2"
                    Background="Wheat"
@@ -109,6 +118,20 @@
                 </MultiBinding>
             </TextBlock.Text>
         </TextBlock>
+        <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:Spectr}}, Path=Caption}"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Padding="2"
+                   Margin="2"
+                   Foreground="Magenta"
+                   Grid.Column="1"
+                   Panel.ZIndex="100"
+                   FontSize="15">
+        </TextBlock>
+        <controls:ScaleSelector x:Name="ScaleSelector"
+                                Grid.Column="0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center" />
     </Grid>
 </UserControl>
 
