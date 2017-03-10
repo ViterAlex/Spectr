@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Media;
 
 namespace SpectrControl.Controls
 {
@@ -10,7 +11,7 @@ namespace SpectrControl.Controls
 
     {
         public static readonly DependencyProperty ValuesProperty = DependencyProperty.Register(
-            "Values", typeof(IEnumerable<double>), typeof(Spectr), new PropertyMetadata(default(IEnumerable<double>)));
+            "Values", typeof(IEnumerable<double>), typeof(Spectr), new FrameworkPropertyMetadata(default(IEnumerable<double>),FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         public IEnumerable<double> Values
         {
@@ -31,7 +32,7 @@ namespace SpectrControl.Controls
         {
             get
             {
-                return (string) GetValue(CaptionProperty);
+                return (string)GetValue(CaptionProperty);
             }
             set
             {
@@ -39,6 +40,36 @@ namespace SpectrControl.Controls
             }
         }
 
+        public static readonly DependencyProperty MinBrushProperty = DependencyProperty.Register(
+            "MinBrush", typeof(Brush), typeof(Spectr), new PropertyMetadata(Brushes.Blue));
+
+        public Brush MinBrush
+        {
+            get
+            {
+                return (Brush)GetValue(MinBrushProperty);
+            }
+            set
+            {
+                SetValue(MinBrushProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty MaxBrushProperty = DependencyProperty.Register(
+            "MaxBrush", typeof(Brush), typeof(Spectr), new PropertyMetadata(Brushes.DarkGreen));
+
+        public Brush MaxBrush
+        {
+            get
+            {
+                return (Brush)GetValue(MaxBrushProperty);
+            }
+            set
+            {
+                SetValue(MaxBrushProperty, value);
+            }
+        }
+        
         public Spectr()
         {
             InitializeComponent();

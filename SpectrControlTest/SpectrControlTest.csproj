@@ -87,7 +87,7 @@
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Commands\CommandReference.cs" />
     <Compile Include="Extentions.cs" />
-    <Compile Include="FilterInput.cs" />
+    <Compile Include="FillConverter.cs" />
     <Compile Include="HeightConverter.cs" />
     <Compile Include="ScaleConverter.cs" />
     <Compile Include="IndexConverter.cs" />

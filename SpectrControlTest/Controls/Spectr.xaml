@@ -6,24 +6,26 @@
              xmlns:controls="clr-namespace:SpectrControl.Controls"
              xmlns:local="clr-namespace:SpectrControl"
              mc:Ignorable="d"
+             x:Name="SpectrUc"
              d:DesignHeight="300"
              d:DesignWidth="300">
     <UserControl.Resources>
         <local:ScaleConverter x:Key="ScaleConverter" />
+        <local:FillConverter x:Key="FillConverter" />
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <ListBox x:Name="ListBox"
                  Grid.Column="1"
-                 ItemsSource="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:Spectr}}, Path=Values}"
+                 ItemsSource="{Binding ElementName=SpectrUc, Path=Values}"
                  HorizontalContentAlignment="Stretch">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Rows="1"
-                                 Background="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:Spectr}}, Path=Background}" />
+                                 Background="{Binding ElementName=SpectrUc, Path=Background}" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ListBox.ItemContainerStyle>
@@ -45,6 +47,27 @@
                             </ToolTip>
                         </Setter.Value>
                     </Setter>
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <MultiBinding Converter="{StaticResource FillConverter}">
+                                <Binding ElementName="SpectrUc"
+                                         Path="Foreground"
+                                         Mode="OneWay" />
+                                <Binding ElementName="SpectrUc"
+                                         Path="MinBrush"
+                                         Mode="OneWay" />
+                                <Binding ElementName="SpectrUc"
+                                         Path="MaxBrush"
+                                         Mode="OneWay" />
+                                <Binding ElementName="SpectrUc"
+                                         Path="Values"
+                                         Mode="OneWay" />
+                                <Binding Mode="OneWay" />
+                                <Binding ElementName="ScaleSelector"
+                                         Mode="OneWay" />
+                            </MultiBinding>
+                        </Setter.Value>
+                    </Setter>
                 </Style>
             </ListBox.ItemContainerStyle>
             <ItemsControl.ItemTemplate>
@@ -58,12 +81,14 @@
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
+                        <DataTrigger Binding="{Binding}">
+                            
+                        </DataTrigger>
                     </DataTemplate.Triggers>
                     <Rectangle VerticalAlignment="Stretch"
                                MinWidth="1"
                                MinHeight="1"
-                               HorizontalAlignment="Stretch"
-                               Fill="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:Spectr}}, Path=Foreground}">
+                               HorizontalAlignment="Stretch">
                         <Rectangle.LayoutTransform>
                             <ScaleTransform CenterX="0.5"
                                             CenterY="0.5"
@@ -71,13 +96,16 @@
                                 <ScaleTransform.ScaleY>
                                     <MultiBinding Converter="{StaticResource ScaleConverter}"
                                                   Mode="OneWay">
-                                        <Binding RelativeSource="{RelativeSource AncestorType={x:Type controls:Spectr}}"
-                                                 Path="Values" />
-                                        <Binding RelativeSource="{RelativeSource AncestorType={x:Type UniformGrid}}"
-                                                 Path="ActualHeight" />
-                                        <Binding />
+                                        <Binding ElementName="SpectrUc"
+                                                 Path="Values"
+                                                 Mode="OneWay" />
+                                        <Binding RelativeSource="{RelativeSource AncestorType={x:Type ScrollViewer}}"
+                                                 Path="ViewportHeight"
+                                                 Mode="OneWay" />
+                                        <Binding Mode="OneWay" />
                                         <Binding ElementName="ScaleSelector"
-                                                 Path="ScaleType" />
+                                                 Path="ScaleType"
+                                                 Mode="OneWay" />
                                     </MultiBinding>
                                 </ScaleTransform.ScaleY>
                             </ScaleTransform>
@@ -118,7 +146,7 @@
                 </MultiBinding>
             </TextBlock.Text>
         </TextBlock>
-        <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type controls:Spectr}}, Path=Caption}"
+        <TextBlock Text="{Binding ElementName=SpectrUc, Path=Caption}"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
                    Padding="2"
