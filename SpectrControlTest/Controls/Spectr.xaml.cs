@@ -11,7 +11,7 @@ namespace SpectrControl.Controls
 
     {
         public static readonly DependencyProperty ValuesProperty = DependencyProperty.Register(
-            "Values", typeof(IEnumerable<double>), typeof(Spectr), new FrameworkPropertyMetadata(default(IEnumerable<double>),FrameworkPropertyMetadataOptions.AffectsMeasure));
+            "Values", typeof(IEnumerable<double>), typeof(Spectr), new FrameworkPropertyMetadata(default(IEnumerable<double>), FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         public IEnumerable<double> Values
         {
@@ -69,10 +69,12 @@ namespace SpectrControl.Controls
                 SetValue(MaxBrushProperty, value);
             }
         }
-        
+
         public Spectr()
         {
             InitializeComponent();
+            Background = Brushes.DarkOliveGreen;
+            Foreground = Brushes.Yellow;
         }
     }
 }

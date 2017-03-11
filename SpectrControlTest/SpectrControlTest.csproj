@@ -87,10 +87,9 @@
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Commands\CommandReference.cs" />
     <Compile Include="Extentions.cs" />
-    <Compile Include="FillConverter.cs" />
     <Compile Include="HeightConverter.cs" />
+    <Compile Include="MaxMinConverter.cs" />
     <Compile Include="ScaleConverter.cs" />
-    <Compile Include="IndexConverter.cs" />
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>

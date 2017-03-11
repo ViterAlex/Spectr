@@ -14,14 +14,6 @@
 
     <Grid>
         <UniformGrid Columns="1">
-            <UniformGrid.Resources>
-                <Style TargetType="controls:Spectr">
-                    <Setter Property="Background"
-                            Value="DarkOliveGreen" />
-                    <Setter Property="Foreground"
-                            Value="Yellow" />
-                </Style>
-            </UniformGrid.Resources>
             <controls:Spectr Values="{Binding ValuesSet[0]}"
                              Caption="Канал 1" />
             <controls:Spectr Values="{Binding ValuesSet[1]}"
@@ -37,44 +29,6 @@
                              Foreground="OrangeRed"
                              Caption="Канал 5" />
         </UniformGrid>
-        <!--<ListBox ItemsSource="{Binding ValuesSet}"
-                 VerticalAlignment="Stretch"
-                 VerticalContentAlignment="Stretch"
-                 HorizontalContentAlignment="Stretch">
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Columns="1" />
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-            <ListBox.ItemContainerStyle>
-                <Style TargetType="ListBoxItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                </Style>
-            </ListBox.ItemContainerStyle>
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.Resources>
-                            <local:IndexConverter x:Key="IndexConverter" />
-                        </Grid.Resources>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <Label Content="{Binding Converter={StaticResource IndexConverter}, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}"
-                               VerticalAlignment="Top"
-                               HorizontalAlignment="Right" />
-                        <controls:Spectr Values="{Binding}"
-                                         Foreground="Yellow"
-                                         Background="DarkSlateGray"
-                                         MaxHeight="150"
-                                         Grid.Column="1"
-                                         HorizontalAlignment="Stretch"/>
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>-->
         <ToggleButton IsChecked="{Binding SpectrTimer.IsEnabled}"
                       HorizontalAlignment="Right"
                       VerticalAlignment="Top">
@@ -98,4 +52,6 @@
         </ToggleButton>
     </Grid>
 </Window>
+
+
 

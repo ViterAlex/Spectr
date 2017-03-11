@@ -5,13 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:SpectrControl.Controls"
              xmlns:local="clr-namespace:SpectrControl"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
              x:Name="SpectrUc"
              d:DesignHeight="300"
              d:DesignWidth="300">
     <UserControl.Resources>
         <local:ScaleConverter x:Key="ScaleConverter" />
-        <local:FillConverter x:Key="FillConverter" />
+        <local:MaxMinConverter x:Key="MinMaxConverter" />
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -25,13 +26,14 @@
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Rows="1"
+                                 UseLayoutRounding="True"
                                  Background="{Binding ElementName=SpectrUc, Path=Background}" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="Margin"
-                            Value="1" />
+                            Value="1,0,0,0" />
                     <Setter Property="Padding"
                             Value="0" />
                     <Setter Property="VerticalAlignment"
@@ -47,33 +49,57 @@
                             </ToolTip>
                         </Setter.Value>
                     </Setter>
-                    <Setter Property="Background">
-                        <Setter.Value>
-                            <MultiBinding Converter="{StaticResource FillConverter}">
-                                <Binding ElementName="SpectrUc"
-                                         Path="Foreground"
-                                         Mode="OneWay" />
-                                <Binding ElementName="SpectrUc"
-                                         Path="MinBrush"
-                                         Mode="OneWay" />
-                                <Binding ElementName="SpectrUc"
-                                         Path="MaxBrush"
-                                         Mode="OneWay" />
-                                <Binding ElementName="SpectrUc"
-                                         Path="Values"
-                                         Mode="OneWay" />
-                                <Binding Mode="OneWay" />
-                                <Binding ElementName="ScaleSelector"
-                                         Mode="OneWay" />
-                            </MultiBinding>
-                        </Setter.Value>
-                    </Setter>
+                    <Setter Property="BorderThickness"
+                            Value="1" />
+                    <Setter Property="BorderBrush"
+                            Value="Black" />
+                    <Setter Property="Background"
+                            Value="{Binding ElementName=SpectrUc, Path=Foreground}" />
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver"
+                                 Value="True">
+                            <Setter Property="Cursor"
+                                    Value="Hand" />
+                        </Trigger>
+                        <!--Триггер максимального значения-->
+                        <DataTrigger Value="True">
+                            <DataTrigger.Binding>
+                                <MultiBinding Converter="{StaticResource MinMaxConverter}">
+                                    <MultiBinding.ConverterParameter>
+                                        <sys:String>max</sys:String>
+                                    </MultiBinding.ConverterParameter>
+                                    <Binding ElementName="SpectrUc"
+                                             Path="Values"
+                                             Mode="OneWay" />
+                                    <Binding Mode="OneWay" />
+                                </MultiBinding>
+                            </DataTrigger.Binding>
+                            <Setter Property="Background"
+                                    Value="{Binding ElementName=SpectrUc, Path=MaxBrush}" />
+                        </DataTrigger>
+                        <!--Триггер минимального значения-->
+                        <DataTrigger Value="True">
+                            <DataTrigger.Binding>
+                                <MultiBinding Converter="{StaticResource MinMaxConverter}">
+                                    <MultiBinding.ConverterParameter>
+                                        <sys:String>min</sys:String>
+                                    </MultiBinding.ConverterParameter>
+                                    <Binding ElementName="SpectrUc"
+                                             Path="Values"
+                                             Mode="OneWay" />
+                                    <Binding Mode="OneWay" />
+                                </MultiBinding>
+                            </DataTrigger.Binding>
+                            <Setter Property="Background"
+                                    Value="{Binding ElementName=SpectrUc, Path=MinBrush}" />
+                        </DataTrigger>
+                    </Style.Triggers>
                 </Style>
             </ListBox.ItemContainerStyle>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <DataTemplate.Triggers>
-                        <EventTrigger RoutedEvent="FrameworkElement.SizeChanged">
+                        <EventTrigger RoutedEvent="Binding.SourceUpdated">
                             <BeginStoryboard>
                                 <Storyboard TargetProperty="Opacity">
                                     <DoubleAnimation Duration="00:00:0.5"
@@ -81,9 +107,6 @@
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
-                        <DataTrigger Binding="{Binding}">
-                            
-                        </DataTrigger>
                     </DataTemplate.Triggers>
                     <Rectangle VerticalAlignment="Stretch"
                                MinWidth="1"
