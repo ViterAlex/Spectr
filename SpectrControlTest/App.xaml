@@ -4,10 +4,18 @@
              xmlns:clr="clr-namespace:System;assembly=mscorlib"
              Startup="OnStartup">
     <Application.Resources>
-        <clr:String x:Key="TimerOnText">Вкл. таймер</clr:String>
-        <clr:String x:Key="TimerOffText">Выкл. таймер</clr:String>
-        <clr:String x:Key="NormalScaleText">Линейная шкала</clr:String>
-        <clr:String x:Key="LogScaleText">Шкала по десятичному логарифму</clr:String>
-        <clr:String x:Key="LnScaleText">Шкала по натуральному логарифму</clr:String>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Theme/Brushes.xaml" />
+                <ResourceDictionary Source="Theme/Core.xaml" />
+                <ResourceDictionary Source="Theme/Icons.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <clr:String x:Key="TimerOnText">Вкл. таймер</clr:String>
+            <clr:String x:Key="TimerOffText">Выкл. таймер</clr:String>
+            <clr:String x:Key="NormalScaleText">Линейная шкала</clr:String>
+            <clr:String x:Key="LogScaleText">Шкала по десятичному логарифму</clr:String>
+            <clr:String x:Key="LnScaleText">Шкала по натуральному логарифму</clr:String>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
+

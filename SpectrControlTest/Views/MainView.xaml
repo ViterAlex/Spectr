@@ -30,10 +30,12 @@
                              Caption="Канал 5" />
         </UniformGrid>
         <ToggleButton IsChecked="{Binding SpectrTimer.IsEnabled}"
-                      HorizontalAlignment="Right"
-                      VerticalAlignment="Top">
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Top"
+                      Content="{StaticResource TimerOnText}">
             <ToggleButton.Style>
-                <Style TargetType="ToggleButton">
+                <Style TargetType="ToggleButton"
+                       BasedOn="{StaticResource {x:Type ToggleButton}}">
                     <Setter Property="Content"
                             Value="{StaticResource TimerOnText}" />
                     <Setter Property="Margin"
@@ -41,9 +43,9 @@
                     <Setter Property="Padding"
                             Value="5" />
                     <Style.Triggers>
-                        <Trigger Property="IsChecked"
+                        <Trigger Property="ToggleButton.IsChecked"
                                  Value="True">
-                            <Setter Property="Content"
+                            <Setter Property="ToggleButton.Content"
                                     Value="{StaticResource TimerOffText}" />
                         </Trigger>
                     </Style.Triggers>

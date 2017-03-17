@@ -7,21 +7,6 @@ namespace SpectrControl.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        public static readonly DependencyProperty FfValuesProperty = DependencyProperty.Register(
-    "FfValues", typeof(ObservableCollection<double>), typeof(MainViewModel), new PropertyMetadata(default(ObservableCollection<double>)));
-
-        public ObservableCollection<double> FfValues
-        {
-            get
-            {
-                return (ObservableCollection<double>)GetValue(FfValuesProperty);
-            }
-            set
-            {
-                SetValue(FfValuesProperty, value);
-            }
-        }
-
         public static readonly DependencyProperty ValuesSetProperty = DependencyProperty.Register(
             "ValuesSet", typeof(ObservableCollection<ObservableCollection<double>>), typeof(MainViewModel), new PropertyMetadata(default(ObservableCollection<ObservableCollection<double>>)));
 
@@ -37,7 +22,6 @@ namespace SpectrControl.ViewModels
             }
         }
 
-
         public DispatcherTimer SpectrTimer { get; }
 
         #region Constructor
@@ -52,15 +36,13 @@ namespace SpectrControl.ViewModels
             var rnd = new Random();
             foreach (var values in ValuesSet)
             {
-                var limit = rnd.Next(128, 256);
-                for (int i = 0; i < limit; i++)
+                for (int i = 0; i < 50; i++)
                 {
                     values.Add(rnd.NextDouble(100, 400));
                 }
             }
 
-            SpectrTimer = new DispatcherTimer();
-            SpectrTimer.Interval = TimeSpan.FromMilliseconds(200);
+            SpectrTimer = new DispatcherTimer {Interval = TimeSpan.FromMilliseconds(200)};
             SpectrTimer.Tick += (sender, args) =>
             {
                 var i = rnd.Next(ValuesSet.Count);

@@ -76,6 +76,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Theme\Brushes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Theme\Core.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Theme\Icons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -88,6 +100,7 @@
     <Compile Include="Commands\CommandReference.cs" />
     <Compile Include="Extentions.cs" />
     <Compile Include="HeightConverter.cs" />
+    <Compile Include="ListItemConverter.cs" />
     <Compile Include="MaxMinConverter.cs" />
     <Compile Include="ScaleConverter.cs" />
     <Compile Include="Views\MainView.xaml.cs">
